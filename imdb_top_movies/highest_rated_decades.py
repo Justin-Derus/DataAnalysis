@@ -4,7 +4,7 @@
 import matplotlib.pyplot as plt
 import pandas as pd
 
-imdb_table = pd.read_csv('imdb_top_movies/imdb_top_movies.csv', index_col = 0)     # DataFrame created off .csv file
+imdb_table = pd.read_csv('./imdb_top_movies.csv', index_col = 0)     # DataFrame created off .csv file
 decade_highest_rated = imdb_table.loc[:,['Year','Rating']]                         # Drop columns we don't need (DataFrame type)
                                                                                    # DataFrame supports slicing via loc and iloc
 decade_highest_rated['Decade'] = (decade_highest_rated['Year'] // 10) * 10         # Create a decade column | (1992 // 10 = 199.2 rounded down) * 10 = 1990
