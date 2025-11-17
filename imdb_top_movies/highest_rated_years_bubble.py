@@ -45,19 +45,20 @@ scatter = plt.scatter(
     average_rating_per_year['Rating'],
     s=average_rating_per_year['Weight'],
     c=average_rating_per_year['Weight'],
-    cmap='cool')
+    cmap='cool',
+    alpha=0.6)
 
 plt.ylim(min_rating - 0.05, max_rating + 0.4) # Used for our zooming
 plt.xlabel('Year')                            # Setting x-axis label
 plt.ylabel('Rating (Average)')                # Setting y-axis label
-plt.title('Best Rated Year (IMDB Top 250) Scatter Version') # Setting the title of the scatter plot
+plt.title('Highest Rated Year on Average (IMDB Top 250) Scatter Version') # Setting the title of the scatter plot
 
 # Create our text to answer the question "What was the highest rated year on average"
 # (x,y,text,horizontal alignment)
 plt.text(
     highest_rated_year,
     max_rating + 0.2,
-    "The highest rated year is: " + str(highest_rated_year) + " at a rating of " + str(highest_rating), 
+    "The Highest Rated Year is: " + str(highest_rated_year) + " at a rating of " + str(highest_rating), 
     ha='center')
 
 # We want to add text to the bubbles that are of a certain size, cannot loop thru like a bar graph, must iterate over the DataFrame
