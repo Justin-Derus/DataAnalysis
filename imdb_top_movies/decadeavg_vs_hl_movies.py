@@ -2,10 +2,11 @@
 # Purpose: Using Kaggle's 250 top IMDB movies, I have generated 3 (Really 1) bar graph depciting the average rating of the top 250
 # movies by per decade, along with the decades single highest, and lowest rated best movie out of the top 250 movies
 
-import pandas as pd                  # Using dataframe
-import matplotlib.pyplot as plt      # Used for visual graphs
-import matplotlib.cm as cm           # Used for normalizing colors and creating a cmap for the bars
-from matplotlib.patches import Patch # Used to remove certain elements from the legend that added nothing of importance
+import pandas as pd                         # Using dataframe
+import matplotlib.pyplot as plt             # Used for visual graphs
+from matplotlib.colors import Normalize     # Used for creating color map
+from matplotlib.cm import ScalarMappable    # Used for creating color bar
+from matplotlib.patches import Patch        # Used to remove certain elements from the legend that added nothing of importance
 
 imdb_table = pd.read_csv('./imdb_top_movies/imdb_top_movies.csv',index_col=0)   # Read in the csv file for data
 
@@ -30,13 +31,13 @@ max_rating = max(cleaned_table['HRM'])      # Used for zooming
 # Coloring Using normalized versions of ratings
 cmap = plt.get_cmap('magma')    # Choose color map
 
-my_norm = cm.colors.Normalize(vmin=cleaned_table['MovieCount'].min(),
+my_norm = Normalize(vmin=cleaned_table['MovieCount'].min(),
                               vmax=cleaned_table['MovieCount'].max()) # Normalize 0-1, lowest is 0.000, max is 1.000 all fall between
 
 colors=cmap(my_norm(cleaned_table['MovieCount'])) # Normalize movie count and make a cmap of the normalization, cmap used for bar colors
 
 # Make a color bar - need a scalarmapable under matplotlibs color
-sm = cm.ScalarMappable(cmap=cmap,norm=my_norm)      # Create ScalarMappable object based on cmap and norms created above
+sm = ScalarMappable(cmap=cmap,norm=my_norm)         # Create ScalarMappable object based on cmap and norms created above
 cbar = plt.colorbar(sm, orientation='horizontal',alpha=0.8)   # Pass in ScalarMappable object to pyplots colorbar, put it below graph for readability
 cbar.set_label('Amount of Movies in Decade')        # Give label to color bar to know what it means
 
@@ -47,7 +48,7 @@ highest_movie_bar = plt.bar(cleaned_table['Decade'],                # Decade (X-
                             color=colors,                           # Colors set to normalized cmap
                             width=8,                                # 10 decades, 8 width is visually appealing
                             zorder=0,                               # In back
-                            alpha = 0.3,                           # lowest alpha in back for visual
+                            alpha = 0.3,                            # lowest alpha in back for visual
                             edgecolor='black',                      # Black edge around the bars
                             label='Highest Rated Movie in Decade')  # Label for legend
 
