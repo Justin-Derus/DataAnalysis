@@ -45,6 +45,7 @@ CREATE TABLE `Product` (
     `Material` VARCHAR(255) DEFAULT NULL,
     `Color` VARCHAR(255) DEFAULT NULL,
     `SubCategory` VARCHAR(255) DEFAULT NULL,
+    `Cost of Goods` DECIMAL(19,4) DEFAULT 0.00,
     PRIMARY KEY (`ProductID`)
 );
 
