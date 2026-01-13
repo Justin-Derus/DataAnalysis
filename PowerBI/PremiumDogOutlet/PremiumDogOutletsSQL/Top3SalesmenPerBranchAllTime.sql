@@ -1,8 +1,8 @@
--- Find The Top 3 Salesmen From Each Branch Uses Window Fxn, Join, Case When
+-- Find The Top 3 Salesmen From Each Branch Uses Window Fxn, Join, Case When - Ties are included (rank() function)
 WITH RankedSales AS ( -- Use a CTE to get all of the information pertaining to the sales and employee number
     SELECT 
     	SUM(ti.SaleTotal) as SalesAmount, t.EmployeeID AS EmpID, t.BranchID as Branch,
-    	ROW_NUMBER() OVER(PARTITION BY t.BranchID ORDER BY SUM(ti.SaleTotal) DESC) AS SaleRank -- window fxn for getting top 3 per branch
+    	DENSE_RANK() OVER(PARTITION BY t.BranchID ORDER BY SUM(ti.SaleTotal) DESC) AS SaleRank -- window fxn for getting top 3 per branch
     FROM TRANSACTIONS AS t
     JOIN transactionitems as ti on ti.TransactionID = t.TransactionID WHERE t.BranchID <> 0 AND t.EmployeeID IS NOT NULL -- branch 0 means all combined, null emp is anon transaction
     GROUP BY t.BranchID, t.EmployeeID
