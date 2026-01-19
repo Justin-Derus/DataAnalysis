@@ -1,6 +1,9 @@
 # DataAnalysis
 Projects Pertaining to Data Analysis 
 
+Online Retail - 2011 Dataset
+![Sales Dashboard](Excel/eCommerceExcelDash.png)
+
 Premium Dog Outlets
 ![Branch Sales](PowerBI/PremiumDogOutlet/Branch%20Sales.png)
 ![Highest Selling Months](PowerBI/PremiumDogOutlet/Highest%20Selling%20Months.png)
